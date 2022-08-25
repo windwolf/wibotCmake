@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.17.0)
+cmake_minimum_required(VERSION 3.21.0)
 
 if(NOT DEFINED OS_PORT)
     message(FATAL_ERROR "Error: OS_PORT not defined")
