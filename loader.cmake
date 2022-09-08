@@ -20,7 +20,7 @@ if(NOT FLOAT_ABI MATCHES "")
     set(MCU_FLAGS "${MCU_FLAGS}  -mfloat-abi=${FLOAT_ABI}")
 endif()
 
-set(LINK_FLAGS "${MCU_FLAGS} -Wl,--gc-sections")
+set(LINK_FLAGS "${MCU_FLAGS} -Wl,--gc-sections,--print-memory-usage")
 set(EXTRA_LINK_FLAGS "-Wl,-Map=${PROJECT_NAME}.map,--cref,--no-warn-mismatch -specs=nano.specs -specs=nosys.specs")
 include(${CMAKE_CURRENT_LIST_DIR}/stm32-gcc-flags.cmake)
 
