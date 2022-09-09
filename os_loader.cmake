@@ -7,7 +7,6 @@ else()
 endif()
 
 if(${OS_PORT} STREQUAL "freertos")
-    message(STATUS "OS_PORT: loading FreeRTOS")
     file(GLOB __FREERTOS_SOURCE_PATHS
         ${CMAKE_CURRENT_SOURCE_DIR}/cubemx/Middlewares/Third_Party/FreeRTOS/Source/*.c
         ${CMAKE_CURRENT_SOURCE_DIR}/cubemx/Middlewares/Third_Party/FreeRTOS/Source/*.S

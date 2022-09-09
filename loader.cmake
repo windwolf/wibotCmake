@@ -27,8 +27,6 @@ include(${CMAKE_CURRENT_LIST_DIR}/stm32-gcc-flags.cmake)
 # 打印配置信息
 message(STATUS "Specified C compiler: ${CMAKE_C_COMPILER}")
 message(STATUS "Linker script: ${LINKER_SCRIPT}")
-message(STATUS "Use LL library: ${USE_LL_LIB}")
-message(STATUS "Use HAL library: ${USE_HAL_LIB}")
 message(STATUS "Use Segger SystemView library: ${USE_SYSTEM_VIEW}")
 
 # # 版本信息
