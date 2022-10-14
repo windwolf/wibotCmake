@@ -78,12 +78,22 @@ else()
 endif()
 
 if(USE_CMSIS_DSP_LIB)
-    file(GLOB_RECURSE CMSIS_DSP_SOURCE_FILES
-        ${CMAKE_CURRENT_SOURCE_DIR}/cubemx/Drivers/CMSIS/DSP/Source/*.*
-    )
-    target_sources(${PROJECT_NAME}
-        PRIVATE
-        ${CMSIS_DSP_SOURCE_FILES})
+    if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/cubemx/Drivers/CMSIS/DSP/Lib)
+        file(GLOB CMSIS_DSP_LIB_FILES
+            ${CMAKE_CURRENT_SOURCE_DIR}/cubemx/Drivers/CMSIS/DSP/Lib/GCC/*.a
+        )
+        target_link_libraries(${PROJECT_NAME}
+            PRIVATE
+            ${CMSIS_DSP_LIB_FILES})
+    else()
+        file(GLOB_RECURSE CMSIS_DSP_SOURCE_FILES
+            ${CMAKE_CURRENT_SOURCE_DIR}/cubemx/Drivers/CMSIS/DSP/Source/*.*
+        )
+        target_sources(${PROJECT_NAME}
+            PRIVATE
+            ${CMSIS_DSP_SOURCE_FILES})
+    endif()
+
     target_include_directories(${PROJECT_NAME}
         PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}/cubemx/Drivers/CMSIS/DSP/Include)
