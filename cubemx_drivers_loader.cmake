@@ -63,6 +63,7 @@ target_include_directories(${PROJECT_NAME}
 )
 
 # ############### CMSIS & CMSISDevice ##################
+set(CMSISCORE ${CMAKE_CURRENT_SOURCE_DIR}/cubemx/Drivers/CMSIS/Core)
 target_include_directories(${PROJECT_NAME}
     PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/cubemx/Drivers/CMSIS/Device/ST/${MCU_SERIES}/Include
@@ -70,38 +71,38 @@ target_include_directories(${PROJECT_NAME}
 )
 
 # ############### CMSIS DSP ############################
-if(NOT DEFINED USE_CMSIS_DSP_LIB)
-    message(STATUS "USE_CMSIS_DSP_LIB: not set, use default value : OFF")
-    set(USE_CMSIS_DSP_LIB OFF)
-else()
-    message(STATUS "USE_CMSIS_DSP_LIB: ${USE_CMSIS_DSP_LIB}")
-endif()
+# if(NOT DEFINED USE_CMSIS_DSP_LIB)
+#     message(STATUS "USE_CMSIS_DSP_LIB: not set, use default value : OFF")
+#     set(USE_CMSIS_DSP_LIB OFF)
+# else()
+#     message(STATUS "USE_CMSIS_DSP_LIB: ${USE_CMSIS_DSP_LIB}")
+# endif()
 
-if(USE_CMSIS_DSP_LIB)
-    if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/cubemx/Drivers/CMSIS/DSP/Lib)
-        file(GLOB CMSIS_DSP_LIB_FILES
-            ${CMAKE_CURRENT_SOURCE_DIR}/cubemx/Drivers/CMSIS/DSP/Lib/GCC/*.a
-        )
-        target_link_libraries(${PROJECT_NAME}
-            PRIVATE
-            ${CMSIS_DSP_LIB_FILES})
-    else()
-        file(GLOB_RECURSE CMSIS_DSP_SOURCE_FILES
-            ${CMAKE_CURRENT_SOURCE_DIR}/cubemx/Drivers/CMSIS/DSP/Source/*.*
-        )
-        target_sources(${PROJECT_NAME}
-            PRIVATE
-            ${CMSIS_DSP_SOURCE_FILES})
-    endif()
+# if(USE_CMSIS_DSP_LIB)
+#     if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/cubemx/Drivers/CMSIS/DSP/Lib)
+#         file(GLOB CMSIS_DSP_LIB_FILES
+#             ${CMAKE_CURRENT_SOURCE_DIR}/cubemx/Drivers/CMSIS/DSP/Lib/GCC/*.a
+#         )
+#         target_link_libraries(${PROJECT_NAME}
+#             PRIVATE
+#             ${CMSIS_DSP_LIB_FILES})
+#     else()
+#         file(GLOB_RECURSE CMSIS_DSP_SOURCE_FILES
+#             ${CMAKE_CURRENT_SOURCE_DIR}/cubemx/Drivers/CMSIS/DSP/Source/*.*
+#         )
+#         target_sources(${PROJECT_NAME}
+#             PRIVATE
+#             ${CMSIS_DSP_SOURCE_FILES})
+#     endif()
 
-    target_include_directories(${PROJECT_NAME}
-        PUBLIC
-        ${CMAKE_CURRENT_SOURCE_DIR}/cubemx/Drivers/CMSIS/DSP/Include)
-    target_compile_definitions(${PROJECT_NAME}
-        PUBLIC
-        -D${ARM_MATH}
-    )
-endif()
+#     target_include_directories(${PROJECT_NAME}
+#         PUBLIC
+#         ${CMAKE_CURRENT_SOURCE_DIR}/cubemx/Drivers/CMSIS/DSP/Include)
+#     target_compile_definitions(${PROJECT_NAME}
+#         PUBLIC
+#         -D${ARM_MATH}
+#     )
+# endif()
 
 # ############### App ##############################
 target_include_directories(${PROJECT_NAME}
