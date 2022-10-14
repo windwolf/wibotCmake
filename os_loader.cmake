@@ -75,10 +75,31 @@ if(${OS_PORT} STREQUAL "freertos")
     )
 
 elseif(${OS_PORT} STREQUAL "threadx" OR ${OS_PORT} STREQUAL "azureRTOS")
+    string(REPLACE "-" "_" _THREADX_CPU ${CPU})
+
+    file(GLOB __THREADX_SOURCE_PATHS
+        ${CMAKE_CURRENT_SOURCE_DIR}/cubemx/AZURE_RTOS/App/*.c
+        ${CMAKE_CURRENT_SOURCE_DIR}/cubemx/Middlewares/ST/threadx/common/src/*.c
+        ${CMAKE_CURRENT_SOURCE_DIR}/cubemx/Middlewares/ST/threadx/ports/${_THREADX_CPU}/gnu/src/*.c
+        ${CMAKE_CURRENT_SOURCE_DIR}/cubemx/Middlewares/ST/threadx/ports/${_THREADX_CPU}/gnu/src/*.s
+    )
+
+    target_sources(${PROJECT_NAME}
+        PRIVATE
+        ${__THREADX_SOURCE_PATHS}
+    )
+
     target_compile_definitions(${PROJECT_NAME}
         PUBLIC
         -DTX_INCLUDE_USER_DEFINE_FILE
-        -DFX_INCLUDE_USER_DEFINE_FILE
+    )
+
+    target_include_directories(${PROJECT_NAME}
+        PUBLIC
+        ${CMAKE_CURRENT_SOURCE_DIR}/cubemx/ST/threadx/common/inc
+        ${CMAKE_CURRENT_SOURCE_DIR}/cubemx/AZURE_RTOS/App
+        ${CMAKE_CURRENT_SOURCE_DIR}/cubemx/Middlewares/ST/threadx/common/inc
+        ${CMAKE_CURRENT_SOURCE_DIR}/cubemx/Middlewares/ST/threadx/ports/${_THREADX_CPU}/gnu/inc/
     )
 endif()
 
@@ -102,7 +123,6 @@ endif()
 # ${CMAKE_CURRENT_SOURCE_DIR}/cubemx/Middlewares/ST/filex/*.c
 # )
 # list(APPEND PROJECT_SOURCES_PATH ${CUBEMX_MW_SOURCES_PATH})
-
 # list(APPEND PROJECT_INCLUDES_PATH
 # ${CMAKE_CURRENT_SOURCE_DIR}/cubemx/Middlewares/ST/filex/common/inc
 # ${CMAKE_CURRENT_SOURCE_DIR}/cubemx/Middlewares/ST/filex/ports/generic/inc
