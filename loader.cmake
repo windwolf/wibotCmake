@@ -16,8 +16,8 @@ if(NOT FPU MATCHES "")
     set(MCU_FLAGS "${MCU_FLAGS}  -mcpu=${CPU}")
 endif()
 
-if(NOT FLOAT_ABI MATCHES "")
-    set(MCU_FLAGS "${MCU_FLAGS}  -mfloat-abi=${FLOAT_ABI}")
+if(NOT Scalar_ABI MATCHES "")
+    set(MCU_FLAGS "${MCU_FLAGS}  -mScalar-abi=${Scalar_ABI}")
 endif()
 
 set(LINK_FLAGS "${MCU_FLAGS} -Wl,--gc-sections,--print-memory-usage")
@@ -46,10 +46,11 @@ include(${CMAKE_CURRENT_LIST_DIR}/os_loader.cmake)
 list_library_directories(${CMAKE_CURRENT_SOURCE_DIR}/libs LIBRARY_NAMES CMakeLists.txt)
 
 foreach(ln ${LIBRARY_NAMES})
-    message(STATUS "lib: ${ln} loading...")
+    message(STATUS "lib: ${ln} loading------------------")
     add_subdirectory(${ln})
-    message(STATUS "lib: ${ln} loaded.")
 endforeach()
+
+message(STATUS "all libs loaded------------------------------------")
 
 # ###### Load App ###################
 process_src_dir(${CMAKE_CURRENT_SOURCE_DIR}/App ${PROJECT_NAME})

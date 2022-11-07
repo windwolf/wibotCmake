@@ -34,22 +34,21 @@ function(list_library_directories dir dirsvar include)
 endfunction()
 
 # function(add_project_library)
-#     add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/libs/${ARGV0})
+# add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/libs/${ARGV0})
 
-#     if(EXISTS ${ARGV1})
-#         list(APPEND PROJECT_LINKS_NAME ${ARGV1})
-#     else()
-#         list(APPEND PROJECT_LINKS_NAME ${ARGV0})
-#     endif()
+# if(EXISTS ${ARGV1})
+# list(APPEND PROJECT_LINKS_NAME ${ARGV1})
+# else()
+# list(APPEND PROJECT_LINKS_NAME ${ARGV0})
+# endif()
 
-#     set(PROJECT_LINKS_NAME ${PROJECT_LINKS_NAME} PARENT_SCOPE)
+# set(PROJECT_LINKS_NAME ${PROJECT_LINKS_NAME} PARENT_SCOPE)
 
-#     # print_list("PROJECT_LINKS_NAME: " ${PROJECT_LINKS_NAME})
+# # print_list("PROJECT_LINKS_NAME: " ${PROJECT_LINKS_NAME})
 # endfunction()
-
 function(process_src_dir dir prject_name)
-    # driver的OS port
     list_source_files(${dir} source_files)
+    # message(STATUS ${source_files})
     target_sources(${prject_name}
         PRIVATE
         ${source_files}
