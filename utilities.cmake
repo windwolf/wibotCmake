@@ -6,11 +6,11 @@ endfunction()
 
 function(list_source_files dir listvar)
     file(GLOB_RECURSE _t_sources_
-        ${dir}/*.c
-        ${dir}/*.cpp
-        ${dir}/*.s
-        ${dir}/*.S
-    )
+            ${dir}/*.c
+            ${dir}/*.cpp
+            ${dir}/*.s
+            ${dir}/*.S
+            )
     SET(${listvar} ${_t_sources_} PARENT_SCOPE)
 endfunction()
 
@@ -18,17 +18,17 @@ function(list_library_directories dir dirsvar include)
     file(GLOB _dirs_ LIST_DIRECTORIES true ${dir}/*)
     SET(_dirlist_ "")
 
-    foreach(_dir_ ${_dirs_})
-        if(IS_DIRECTORY ${_dir_})
-            if(DEFINED include)
-                if(EXISTS ${_dir_}/${include})
+    foreach (_dir_ ${_dirs_})
+        if (IS_DIRECTORY ${_dir_})
+            if (DEFINED include)
+                if (EXISTS ${_dir_}/${include})
                     list(APPEND _dirlist_ ${_dir_})
-                endif()
-            else()
+                endif ()
+            else ()
                 list(APPEND _dirlist_ ${_dir_})
-            endif()
-        endif()
-    endforeach()
+            endif ()
+        endif ()
+    endforeach ()
 
     SET(${dirsvar} ${_dirlist_} PARENT_SCOPE)
 endfunction()
@@ -50,11 +50,11 @@ function(process_src_dir dir prject_name)
     list_source_files(${dir} source_files)
     # message(STATUS ${source_files})
     target_sources(${prject_name}
-        PRIVATE
-        ${source_files}
-    )
+            PRIVATE
+            ${source_files}
+            )
     target_include_directories(${prject_name}
-        PRIVATE
-        ${dir}
-        ${dir}/..)
+            PRIVATE
+            ${dir}
+            ${dir}/..)
 endfunction()

@@ -1,7 +1,7 @@
 # the name of the target operating system
-set(CMAKE_SYSTEM_NAME   Generic)
-set(CMAKE_SYSTEM_VERSION  1)
-set(CMAKE_SYSTEM_PROCESSOR  Arm)
+set(CMAKE_SYSTEM_NAME Generic)
+set(CMAKE_SYSTEM_VERSION 1)
+set(CMAKE_SYSTEM_PROCESSOR Arm)
 
 # # specify the cross compiler
 set(CMAKE_C_COMPILER ${CROSS_COMPILE_PREFIX}-gcc)
@@ -15,7 +15,6 @@ find_program(ARM_SIZE_EXECUTABLE ${CROSS_COMPILE_PREFIX}-size)
 find_program(ARM_GDB_EXECUTABLE ${CROSS_COMPILE_PREFIX}-gdb)
 find_program(ARM_OBJCOPY_EXECUTABLE ${CROSS_COMPILE_PREFIX}-objcopy)
 find_program(ARM_OBJDUMP_EXECUTABLE ${CROSS_COMPILE_PREFIX}-objdump)
-
 
 
 # search for program/library/include in the build host directories

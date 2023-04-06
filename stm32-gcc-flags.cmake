@@ -1,9 +1,9 @@
 # generate flags from user variables
-if(CMAKE_BUILD_TYPE MATCHES Debug)
+if (CMAKE_BUILD_TYPE MATCHES Debug)
     set(DBG_FLAGS "-g3 -gdwarf-2 -O0")
-elseif(CMAKE_BUILD_TYPE MATCHES Release)
+elseif (CMAKE_BUILD_TYPE MATCHES Release)
     set(DBG_FLAGS "-O0")
-endif()
+endif ()
 
 # stm32 gcc common flags
 message(STATUS "MCU_FLAGS: ${MCU_FLAGS}")

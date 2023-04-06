@@ -1,107 +1,107 @@
 cmake_minimum_required(VERSION 3.21.0)
 
-if(NOT DEFINED OS_PORT)
+if (NOT DEFINED OS_PORT)
     message(FATAL_ERROR "Error: OS_PORT not defined")
-else()
+else ()
     message(STATUS "OS_PORT: ${OS_PORT}")
-endif()
+endif ()
 
-if(${OS_PORT} STREQUAL "freertos")
+if (${OS_PORT} STREQUAL "freertos")
     file(GLOB __FREERTOS_SOURCE_PATHS
-        ${CMAKE_CURRENT_SOURCE_DIR}/cubemx/Middlewares/Third_Party/FreeRTOS/Source/*.c
-        ${CMAKE_CURRENT_SOURCE_DIR}/cubemx/Middlewares/Third_Party/FreeRTOS/Source/*.S
-    )
+            ${CMAKE_CURRENT_SOURCE_DIR}/cubemx/Middlewares/Third_Party/FreeRTOS/Source/*.c
+            ${CMAKE_CURRENT_SOURCE_DIR}/cubemx/Middlewares/Third_Party/FreeRTOS/Source/*.S
+            )
     target_sources(${PROJECT_NAME}
-        PRIVATE
-        ${__FREERTOS_SOURCE_PATHS}
-    )
+            PRIVATE
+            ${__FREERTOS_SOURCE_PATHS}
+            )
     file(GLOB_RECURSE __FREERTOS_SOURCE_PATHS
-        ${CMAKE_CURRENT_SOURCE_DIR}/cubemx/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/*.c
-    )
+            ${CMAKE_CURRENT_SOURCE_DIR}/cubemx/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/*.c
+            )
     target_sources(${PROJECT_NAME}
-        PRIVATE
-        ${__FREERTOS_SOURCE_PATHS}
-    )
+            PRIVATE
+            ${__FREERTOS_SOURCE_PATHS}
+            )
 
-    if(NOT DEFINED OS_PORT_FREERTOS_MEM_MANG)
+    if (NOT DEFINED OS_PORT_FREERTOS_MEM_MANG)
         message(FATAL_ERROR "Error: OS_PORT_FREERTOS_MEM_MANG not defined")
-    else()
+    else ()
         message(STATUS "OS_PORT_FREERTOS_MEM_MANG: ${OS_PORT_FREERTOS_MEM_MANG}")
-    endif()
+    endif ()
 
-    if(${OS_PORT_FREERTOS_MEM_MANG} STREQUAL "heap1")
+    if (${OS_PORT_FREERTOS_MEM_MANG} STREQUAL "heap1")
         target_sources(${PROJECT_NAME}
-            PRIVATE
-            ${CMAKE_CURRENT_SOURCE_DIR}/cubemx/Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_1.c
-        )
-    elseif(${OS_PORT_FREERTOS_MEM_MANG} STREQUAL "heap2")
+                PRIVATE
+                ${CMAKE_CURRENT_SOURCE_DIR}/cubemx/Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_1.c
+                )
+    elseif (${OS_PORT_FREERTOS_MEM_MANG} STREQUAL "heap2")
         target_sources(${PROJECT_NAME}
-            PRIVATE
-            ${CMAKE_CURRENT_SOURCE_DIR}/cubemx/Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_2.c
-        )
-    elseif(${OS_PORT_FREERTOS_MEM_MANG} STREQUAL "heap3")
+                PRIVATE
+                ${CMAKE_CURRENT_SOURCE_DIR}/cubemx/Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_2.c
+                )
+    elseif (${OS_PORT_FREERTOS_MEM_MANG} STREQUAL "heap3")
         target_sources(${PROJECT_NAME}
-            PRIVATE
-            ${CMAKE_CURRENT_SOURCE_DIR}/cubemx/Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_3.c
-        )
-    elseif(${OS_PORT_FREERTOS_MEM_MANG} STREQUAL "heap4")
+                PRIVATE
+                ${CMAKE_CURRENT_SOURCE_DIR}/cubemx/Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_3.c
+                )
+    elseif (${OS_PORT_FREERTOS_MEM_MANG} STREQUAL "heap4")
         target_sources(${PROJECT_NAME}
-            PRIVATE
-            ${CMAKE_CURRENT_SOURCE_DIR}/cubemx/Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c
-        )
-    elseif(${OS_PORT_FREERTOS_MEM_MANG} STREQUAL "heap5")
+                PRIVATE
+                ${CMAKE_CURRENT_SOURCE_DIR}/cubemx/Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c
+                )
+    elseif (${OS_PORT_FREERTOS_MEM_MANG} STREQUAL "heap5")
         target_sources(${PROJECT_NAME}
-            PRIVATE
-            ${CMAKE_CURRENT_SOURCE_DIR}/cubemx/Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_5.c
-        )
-    endif()
+                PRIVATE
+                ${CMAKE_CURRENT_SOURCE_DIR}/cubemx/Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_5.c
+                )
+    endif ()
 
     file(GLOB __FREERTOS_SOURCE_PATHS
-        ${CMAKE_CURRENT_SOURCE_DIR}/cubemx/Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/*.c
-    )
+            ${CMAKE_CURRENT_SOURCE_DIR}/cubemx/Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/*.c
+            )
     target_sources(${PROJECT_NAME}
-        PRIVATE
-        ${__FREERTOS_SOURCE_PATHS}
-    )
+            PRIVATE
+            ${__FREERTOS_SOURCE_PATHS}
+            )
 
     target_include_directories(${PROJECT_NAME}
-        PUBLIC
-        ${CMAKE_CURRENT_SOURCE_DIR}/cubemx/Middlewares/Third_Party/FreeRTOS/Source/include
-        ${CMAKE_CURRENT_SOURCE_DIR}/cubemx/Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2
-        ${CMAKE_CURRENT_SOURCE_DIR}/cubemx/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3
-        ${CMAKE_CURRENT_SOURCE_DIR}/cubemx/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4
-        ${CMAKE_CURRENT_SOURCE_DIR}/cubemx/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7
-        ${CMAKE_CURRENT_SOURCE_DIR}/cubemx/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM33
-    )
+            PUBLIC
+            ${CMAKE_CURRENT_SOURCE_DIR}/cubemx/Middlewares/Third_Party/FreeRTOS/Source/include
+            ${CMAKE_CURRENT_SOURCE_DIR}/cubemx/Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2
+            ${CMAKE_CURRENT_SOURCE_DIR}/cubemx/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3
+            ${CMAKE_CURRENT_SOURCE_DIR}/cubemx/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4
+            ${CMAKE_CURRENT_SOURCE_DIR}/cubemx/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7
+            ${CMAKE_CURRENT_SOURCE_DIR}/cubemx/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM33
+            )
 
-elseif(${OS_PORT} STREQUAL "threadx" OR ${OS_PORT} STREQUAL "azureRTOS")
+elseif (${OS_PORT} STREQUAL "threadx" OR ${OS_PORT} STREQUAL "azureRTOS")
     string(REPLACE "-" "_" _THREADX_CPU ${CPU})
 
     file(GLOB __THREADX_SOURCE_PATHS
-        ${CMAKE_CURRENT_SOURCE_DIR}/cubemx/AZURE_RTOS/App/*.c
-        ${CMAKE_CURRENT_SOURCE_DIR}/cubemx/Middlewares/ST/threadx/common/src/*.c
-        ${CMAKE_CURRENT_SOURCE_DIR}/cubemx/Middlewares/ST/threadx/ports/${_THREADX_CPU}/gnu/src/*.c
-        ${CMAKE_CURRENT_SOURCE_DIR}/cubemx/Middlewares/ST/threadx/ports/${_THREADX_CPU}/gnu/src/*.s
-    )
+            ${CMAKE_CURRENT_SOURCE_DIR}/cubemx/AZURE_RTOS/App/*.c
+            ${CMAKE_CURRENT_SOURCE_DIR}/cubemx/Middlewares/ST/threadx/common/src/*.c
+            ${CMAKE_CURRENT_SOURCE_DIR}/cubemx/Middlewares/ST/threadx/ports/${_THREADX_CPU}/gnu/src/*.c
+            ${CMAKE_CURRENT_SOURCE_DIR}/cubemx/Middlewares/ST/threadx/ports/${_THREADX_CPU}/gnu/src/*.s
+            )
 
     target_sources(${PROJECT_NAME}
-        PRIVATE
-        ${__THREADX_SOURCE_PATHS}
-    )
+            PRIVATE
+            ${__THREADX_SOURCE_PATHS}
+            )
 
     target_compile_definitions(${PROJECT_NAME}
-        PUBLIC
-        -DTX_INCLUDE_USER_DEFINE_FILE
-    )
+            PUBLIC
+            -DTX_INCLUDE_USER_DEFINE_FILE
+            )
 
     target_include_directories(${PROJECT_NAME}
-        PUBLIC
-        ${CMAKE_CURRENT_SOURCE_DIR}/cubemx/ST/threadx/common/inc
-        ${CMAKE_CURRENT_SOURCE_DIR}/cubemx/AZURE_RTOS/App
-        ${CMAKE_CURRENT_SOURCE_DIR}/cubemx/Middlewares/ST/threadx/common/inc
-        ${CMAKE_CURRENT_SOURCE_DIR}/cubemx/Middlewares/ST/threadx/ports/${_THREADX_CPU}/gnu/inc/
-    )
-endif()
+            PUBLIC
+            ${CMAKE_CURRENT_SOURCE_DIR}/cubemx/ST/threadx/common/inc
+            ${CMAKE_CURRENT_SOURCE_DIR}/cubemx/AZURE_RTOS/App
+            ${CMAKE_CURRENT_SOURCE_DIR}/cubemx/Middlewares/ST/threadx/common/inc
+            ${CMAKE_CURRENT_SOURCE_DIR}/cubemx/Middlewares/ST/threadx/ports/${_THREADX_CPU}/gnu/inc/
+            )
+endif ()
 
 # cubemx集成threadx
 # file(GLOB_RECURSE CUBEMX_MW_SOURCES_PATH
