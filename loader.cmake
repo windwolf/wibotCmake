@@ -38,6 +38,8 @@ if (USE_SYSTEM_VIEW)
     add_definitions("-DENABLE_SYSTEMVIEW")
 endif ()
 
+include(${CMAKE_CURRENT_LIST_DIR}/target_def.cmake)
+
 include(${CMAKE_CURRENT_LIST_DIR}/cubemx_drivers_loader.cmake)
 
 include(${CMAKE_CURRENT_LIST_DIR}/os_loader.cmake)
