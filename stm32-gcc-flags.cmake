@@ -12,11 +12,11 @@ message(STATUS "DBG_FLAGS: ${DBG_FLAGS}")
 # set(COMMON_FLAGS "-specs=nosys.specs -specs=nano.specs")
 
 # compiler: language specific flags
-set(CMAKE_C_FLAGS "${MCU_FLAGS} -Wall -fdata-sections -ffunction-sections ${DBG_FLAGS} " CACHE INTERNAL "C compiler flags")
+set(CMAKE_C_FLAGS "${MCU_FLAGS} -Wall -Wno-comment -fdata-sections -ffunction-sections ${DBG_FLAGS} " CACHE INTERNAL "C compiler flags")
 set(CMAKE_C_FLAGS_DEBUG "" CACHE INTERNAL "C compiler flags: Debug")
 set(CMAKE_C_FLAGS_RELEASE "" CACHE INTERNAL "C compiler flags: Release")
 
-set(CMAKE_CXX_FLAGS "${MCU_FLAGS} -fno-rtti -fno-exceptions -fno-builtin -Wall -Wno-register -fdata-sections -ffunction-sections ${DBG_FLAGS} " CACHE INTERNAL "Cxx compiler flags")
+set(CMAKE_CXX_FLAGS "${MCU_FLAGS} -fno-rtti -fno-exceptions -fno-builtin -Wall -Wno-volatile -Wno-register -fdata-sections -ffunction-sections ${DBG_FLAGS} " CACHE INTERNAL "Cxx compiler flags")
 set(CMAKE_CXX_FLAGS_DEBUG "" CACHE INTERNAL "Cxx compiler flags: Debug")
 set(CMAKE_CXX_FLAGS_RELEASE "" CACHE INTERNAL "Cxx compiler flags: Release")
 
