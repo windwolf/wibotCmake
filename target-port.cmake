@@ -72,6 +72,8 @@ else ()
 
         if (TARGET_MCU MATCHES "^STM32G431")
             set(MCU_LINE "STM32G431xx")
+        elseif (TARGET_MCU MATCHES "^STM32G474")
+            set(MCU_LINE "STM32G474xx")
         else ()
             message(WARNING "Error: 未知的MCU_LINE")
         endif ()
